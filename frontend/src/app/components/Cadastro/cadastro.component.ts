@@ -13,7 +13,7 @@ export class CadastroComponent {
     private readonly apiServices: ApiService
   ) {}
 
-  resetForm(my_form: NgForm){
+  resetForm(my_form: NgForm) {
     my_form.resetForm();
   }
 
@@ -74,20 +74,41 @@ export class CadastroComponent {
 
         await this.apiServices.cadastroPaciente({ nome: nomePc, cpf, email });
 
-        alert("Paciente criado com sucesso.")
+        alert('Paciente criado com sucesso.');
         form.resetForm();
         break;
 
-        case 'Procedimento':
-          const codigo: string = form?.form?.value?.codigo.toString();
-          const nomePr: string = form?.form?.value?.nome;
-          const prazo: string = form?.form?.value?.prazo.toString();
-  
-          await this.apiServices.cadastroProcedimento({ codigo, nome: nomePr, prazo });
-  
-          alert("Procedimento criado com sucesso.")
-          form.resetForm();
-          break;
+      case 'Procedimento':
+        const codigo: string = form?.form?.value?.codigo.toString();
+        const nomePr: string = form?.form?.value?.nome;
+        const prazo: string = form?.form?.value?.prazo.toString();
+
+        await this.apiServices.cadastroProcedimento({
+          codigo,
+          nome: nomePr,
+          prazo,
+        });
+
+        alert('Procedimento criado com sucesso.');
+        form.resetForm();
+        break;
+
+      case 'Exame':
+        const codigoEx: string = form?.form?.value?.codigo.toString();
+        const nomeEx: string = form?.form?.value?.nome;
+        const coleta: string = form?.form?.value?.coleta.toString();
+        const resultado: string = form?.form?.value?.resultado.toString();
+
+        await this.apiServices.cadastroExame({
+          codigo: codigoEx,
+          nome: nomeEx,
+          coleta,
+          resultado,
+        });
+
+        alert('Exame criado com sucesso.');
+        form.resetForm();
+        break;
 
       default:
         break;

@@ -1,4 +1,4 @@
-<section class="flex justify-center">
+<section class="flex justify-center min-h-screen">
   <div class="mt-6 flex w-4/5 flex-col space-y-5">
     <h2 class="title">Cadastro</h2>
     <form
@@ -9,7 +9,7 @@
       method="post"
       id="cadastro"
     >
-      <label for="procedure">Escolha uma opção abaixo:</label>
+      <label class="text-base" for="procedure">Escolha uma opção abaixo:</label>
       <select
         class="mb-3 min-w-[250px] max-w-[500px] rounded-lg"
         aria-label="Escolha uma opção"
@@ -19,14 +19,13 @@
         <option *ngFor="let n of procedures">{{ n }}</option>
       </select>
 
-      <!-- *ngIf="mostraPacienteBlock" -->
       <!-- PACIENTES -->
       <div *ngIf="mostraPacienteBlock" class="flex flex-col space-y-5">
         <div class="flex flex-col space-y-2">
           <label class="rounded-lg" for="nome">Nome</label>
           <input
             name="nome"
-            class="focus: rounded-lg border-#4 focus:border"
+            class="inputForm"
             type="text"
             ngModel
           />
@@ -35,7 +34,7 @@
         <div class="flex flex-col space-y-2">
           <label for="cpf">CPF</label>
           <input
-            class="focus: rounded-lg border-#4 focus:border"
+            class="inputForm"
             type="number"
             name="cpf"
             maxlength="11"
@@ -46,7 +45,7 @@
         <div class="flex flex-col space-y-2">
           <label for="email">Email</label>
           <input
-            class="focus: rounded-lg border-#4 focus:border"
+            class="inputForm"
             type="email"
             name="email"
             ngModel
@@ -61,7 +60,7 @@
           <input
             ngModel
             name="codigo"
-            class="focus: rounded-lg border-#4 focus:border"
+            class="inputForm"
             type="number"
           />
         </div>
@@ -71,7 +70,7 @@
           <input
             ngModel
             name="nome"
-            class="focus: rounded-lg border-#4 focus:border"
+            class="inputForm"
             type="text"
           />
         </div>
@@ -81,7 +80,7 @@
           <input
             ngModel
             name="prazo"
-            class="focus: rounded-lg border-#4 focus:border"
+            class="inputForm"
             type="number"
           />
         </div>
@@ -90,27 +89,43 @@
       <!-- EXAMES -->
       <div *ngIf="mostraExameBlock" class="flex flex-col space-y-5">
         <div class="flex flex-col space-y-2">
-          <label class="rounded-lg" for="">Código</label>
+          <label class="rounded-lg" for="codigo">Código</label>
           <input
-            class="focus: rounded-lg border-#4 focus:border"
+            ngModel
+            name="codigo"
+            class="inputForm"
             type="number"
           />
         </div>
         <div class="flex flex-col space-y-2">
-          <label for="">Nome</label>
-          <input class="focus: rounded-lg border-#4 focus:border" type="text" />
+          <label for="nome">Nome</label>
+          <input
+            ngModel
+            name="nome"
+            class="inputForm"
+            type="text"
+          />
         </div>
         <div class="flex flex-col space-y-2">
-          <label for="">Data da coleta</label>
-          <input class="focus: rounded-lg border-#4 focus:border" type="date" />
+          <label for="coleta">Data da coleta</label>
+          <input
+            ngModel
+            name="coleta"
+            class="inputForm"
+            type="date"
+          />
         </div>
         <div class="flex flex-col space-y-2">
-          <label for="">Data da entrega do resultado</label>
-          <input class="focus: rounded-lg border-#4 focus:border" type="date" />
+          <label for="resultado">Data da entrega do resultado</label>
+          <input
+            ngModel
+            name="resultado"
+            class="inputForm"
+            type="date"
+          />
         </div>
       </div>
 
-      <!-- *ngIf="procedureSelected" -->
       <div>
         <button
           *ngIf="procedureSelected"

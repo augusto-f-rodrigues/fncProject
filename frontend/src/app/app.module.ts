@@ -10,6 +10,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { PacientesComponent } from './components/Pacientes/pacientes.component';
 import { ProcedimentoComponent } from './components/Procedimento/procedimento.component';
+import { ExameComponent } from './components/Exames/exame.component';
+import { FooterComponent } from './components/Footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +19,9 @@ import { ProcedimentoComponent } from './components/Procedimento/procedimento.co
     NavbarComponent,
     CadastroComponent,
     PacientesComponent,
-    ProcedimentoComponent
+    ProcedimentoComponent,
+    ExameComponent,
+    FooterComponent
   ],
   imports: [
     FormsModule,

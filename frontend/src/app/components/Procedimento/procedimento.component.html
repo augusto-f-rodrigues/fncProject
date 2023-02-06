@@ -1,4 +1,4 @@
-<section class="flex justify-center">
+<section class="flex min-h-screen justify-center">
   <div class="mt-6 flex w-4/5 flex-col space-y-5">
     <h2 class="title">Procedimentos</h2>
 
@@ -8,13 +8,21 @@
         class="flex min-w-[250px] max-w-[500px] flex-col space-y-4 rounded-lg border border-white bg-#2 p-7"
       >
         <span class="text-lg font-semibold text-#4">Código:</span>
-        <span class="text-lg font-semibold text-#3">{{procedimento.codigo}}</span>
+        <span
+          class="text-lg font-semibold text-#3"
+          >{{procedimento.codigo}}</span
+        >
 
         <span class="text-lg font-semibold text-#4">Nome:</span>
         <span class="text-lg font-semibold text-#3">{{procedimento.nome}}</span>
 
-        <span class="text-lg font-semibold text-#4">Prazo máximo para análise em dias:</span>
-        <span class="text-lg font-semibold text-#3 break-words">{{procedimento.prazo}}</span>
+        <span class="text-lg font-semibold text-#4"
+          >Prazo máximo para análise em dias:</span
+        >
+        <span
+          class="break-words text-lg font-semibold text-#3"
+          >{{procedimento.prazo}}</span
+        >
       </li>
     </ul>
   </div>

@@ -38,4 +38,19 @@ export class ApiService {
 
     return response;
   }
+
+  // EXAME
+  async cadastroExame(exame: Exame.Request) {
+    const response = await lastValueFrom(
+      this.httpService.post('http://localhost:8080/api/exames', exame)
+    ).catch((e) => throwError(() => new Error(e)));
+
+    return response;
+  }
+
+  async resgatarExames() {
+    const response = await lastValueFrom(this.httpService.get('http://localhost:8080/api/exames'));
+
+    return response;
+  }
 }

@@ -17,5 +17,8 @@
   .title {
     @apply text-2xl md:text-4xl font-semibold
   }
+  .inputForm {
+    @apply rounded-lg border-#4 focus:border p-1
+  }
 }
 
