@@ -1,0 +1,14 @@
+{
+  "configurations": [
+    {
+      "type": "java",
+      "name": "Spring Boot-FncProjectApplication<FncProject>",
+      "request": "launch",
+      "cwd": "${workspaceFolder}",
+      "mainClass": "com.fnc.FncProject.FncProjectApplication",
+      "projectName": "FncProject",
+      "args": "",
+      "envFile": "${workspaceFolder}/.env"
+    }
+  ]
+}

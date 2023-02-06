@@ -1,0 +1,40 @@
+<!-- Navbar -->
+<nav class="sticky z-50 flex h-10 items-center justify-center bg-[#1A120B]">
+  <div class="flex w-4/5">
+    <div class="flex-1 font-bold text-#1"> <a routerLink="">FNC</a></div>
+    <ul class="hidden space-x-8 w-1/4 justify-around text-#1 md:flex">
+      <li class="">
+        <a routerLink="">Home</a>
+      </li>
+      <li class="">
+        <a routerLink="/pacientes">Paciente</a>
+      </li>
+      <li class=""><a routerLink="/procedimentos">Procedimento</a></li>
+      <li class="">Exame</li>
+    </ul>
+    <button (click)="toggleMenu()" class="flex text-#1 md:hidden">
+      <fa-icon size="lg" [icon]="faBars"></fa-icon>
+    </button>
+  </div>
+</nav>
+
+<div
+  [class.hidden]="!isOpen"
+  class="fixed top-0 right-0 z-50 flex h-screen w-2/3 justify-center bg-#3"
+>
+  <button (click)="toggleMenu()" class="absolute top-2 right-8 text-#1">
+    <fa-icon size="lg" [icon]="faXmark"></fa-icon>
+  </button>
+  <ul
+    class="w-fit flex-col items-center justify-around space-y-5 pt-12 text-#1"
+  >
+    <li class="w-full border-b-[1px]">
+      <a routerLink="/">Home</a>
+    </li>
+    <li class="w-full border-b-[1px]">
+      <a routerLink="/pacientes">Paciente</a>
+    </li>
+    <li class="w-full border-b-[1px]">Procedimento</li>
+    <li class="w-full border-b-[1px]">Exame</li>
+  </ul>
+</div>
