@@ -34,7 +34,7 @@ export class ApiService {
   }
 
   async resgatarProcedimentos() {
-    const response = await lastValueFrom(this.httpService.get('http://localhost:8080/api/procedimentos'));
+    const response  = await lastValueFrom(this.httpService.get<Array<Procedimento.Request>>('http://localhost:8080/api/procedimentos'));
 
     return response;
   }

@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
+import { ApiService } from './api-service.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ValidationService {
-  constructor() {}
+  constructor(private readonly apiServices: ApiService) {}
 
   testaCPF(strCPF: string): boolean {
     var Soma;
@@ -28,5 +29,33 @@ export class ValidationService {
     if (Resto != parseInt(strCPF.substring(10, 11))) return false;
 
     return true;
+  }
+
+  async calcBiggestTerm(date: Date) {
+    const procedimentosList = await this.apiServices.resgatarProcedimentos();
+
+    const maiorPrazo = procedimentosList
+      .map((el) => +el.prazo)
+      .reduce((a, b) => Math.max(a, b));
+
+    date.setDate(date.getDate() + maiorPrazo);
+
+    console.log(date);
+
+    return date;
+  }
+
+  formatDate(date: Date) {
+    let day, month, year;
+
+    day = date.getDate();
+    month = date.getMonth() + 1;
+    year = date.getFullYear();
+
+    day = day.toString().padStart(2, '0');
+
+    month = month.toString().padStart(2, '0');
+
+    return `${year}-${month}-${day}`;
   }
 }

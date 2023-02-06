@@ -1,4 +1,4 @@
-<section class="flex justify-center min-h-screen">
+<section class="flex min-h-screen justify-center">
   <div class="mt-6 flex w-4/5 flex-col space-y-5">
     <h2 class="title">Cadastro</h2>
     <form
@@ -23,12 +23,7 @@
       <div *ngIf="mostraPacienteBlock" class="flex flex-col space-y-5">
         <div class="flex flex-col space-y-2">
           <label class="rounded-lg" for="nome">Nome</label>
-          <input
-            name="nome"
-            class="inputForm"
-            type="text"
-            ngModel
-          />
+          <input name="nome" class="inputForm" type="text" ngModel />
         </div>
 
         <div class="flex flex-col space-y-2">
@@ -44,12 +39,7 @@
 
         <div class="flex flex-col space-y-2">
           <label for="email">Email</label>
-          <input
-            class="inputForm"
-            type="email"
-            name="email"
-            ngModel
-          />
+          <input class="inputForm" type="email" name="email" ngModel />
         </div>
       </div>
 
@@ -57,64 +47,52 @@
       <div *ngIf="mostraProcedimentoBlock" class="flex flex-col space-y-5">
         <div class="flex flex-col space-y-2">
           <label class="rounded-lg" for="codigo">Código</label>
-          <input
-            ngModel
-            name="codigo"
-            class="inputForm"
-            type="number"
-          />
+          <input ngModel name="codigo" class="inputForm" type="number" />
         </div>
 
         <div class="flex flex-col space-y-2">
           <label for="nome">Nome</label>
-          <input
-            ngModel
-            name="nome"
-            class="inputForm"
-            type="text"
-          />
+          <input ngModel name="nome" class="inputForm" type="text" />
         </div>
 
         <div class="flex flex-col space-y-2">
           <label for="prazo">Prazo máximo para análise em dias</label>
-          <input
-            ngModel
-            name="prazo"
-            class="inputForm"
-            type="number"
-          />
+          <input ngModel name="prazo" class="inputForm" type="number" />
         </div>
       </div>
 
       <!-- EXAMES -->
       <div *ngIf="mostraExameBlock" class="flex flex-col space-y-5">
         <div class="flex flex-col space-y-2">
-          <label class="rounded-lg" for="codigo">Código</label>
-          <input
-            ngModel
-            name="codigo"
-            class="inputForm"
-            type="number"
-          />
+          <label class="rounded-lg" for="codigo">Paciente</label>
+          <select ngModel name="paciente" class="inputForm">
+            <option *ngFor="let paciente of pacientesList">
+              {{paciente.nome}}
+            </option>
+          </select>
         </div>
+
         <div class="flex flex-col space-y-2">
-          <label for="nome">Nome</label>
-          <input
-            ngModel
-            name="nome"
-            class="inputForm"
-            type="text"
-          />
+          <label class="rounded-lg" for="procedimento">Procedimento</label>
+          <select ngModel name="procedimento" class="inputForm">
+            <option *ngFor="let procedimento of procedimentosList">
+              {{procedimento.nome}}
+            </option>
+          </select>
         </div>
+
         <div class="flex flex-col space-y-2">
           <label for="coleta">Data da coleta</label>
           <input
             ngModel
+            (ngModelChange)="disponibilityDate($event)"
             name="coleta"
             class="inputForm"
             type="date"
           />
         </div>
+
+        <!-- BLOQUEAR FINAIS DE SEMANA -->
         <div class="flex flex-col space-y-2">
           <label for="resultado">Data da entrega do resultado</label>
           <input
@@ -122,6 +100,7 @@
             name="resultado"
             class="inputForm"
             type="date"
+            min="{{formatDate}}"
           />
         </div>
       </div>
