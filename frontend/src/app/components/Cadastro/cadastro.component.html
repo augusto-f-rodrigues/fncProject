@@ -23,12 +23,13 @@
       <div *ngIf="mostraPacienteBlock" class="flex flex-col space-y-5">
         <div class="flex flex-col space-y-2">
           <label class="rounded-lg" for="nome">Nome</label>
-          <input name="nome" class="inputForm" type="text" ngModel />
+          <input required name="nome" class="inputForm" type="text" ngModel />
         </div>
 
         <div class="flex flex-col space-y-2">
           <label for="cpf">CPF</label>
           <input
+            required
             class="inputForm"
             type="number"
             name="cpf"
@@ -40,7 +41,7 @@
 
         <div class="flex flex-col space-y-2">
           <label for="email">Email</label>
-          <input class="inputForm" type="email" name="email" ngModel />
+          <input required class="inputForm" type="email" name="email" ngModel />
         </div>
       </div>
 

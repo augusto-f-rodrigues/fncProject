@@ -7,7 +7,7 @@ import { ApiService } from './api-service.service';
 export class ValidationService {
   constructor(private readonly apiServices: ApiService) {}
 
-  testaCPF(strCPF: string): boolean {
+  testCPF(strCPF: string): boolean {
     var Soma;
     var Resto;
     Soma = 0;
@@ -26,9 +26,20 @@ export class ValidationService {
     Resto = (Soma * 10) % 11;
 
     if (Resto == 10 || Resto == 11) Resto = 0;
-    if (Resto != parseInt(strCPF.substring(10, 11))) return false;
+    if (Resto != parseInt(strCPF.substring(10, 11))){
+      alert('Cpf inserido inválido.');
+      return false;
+    }
 
     return true;
+  }
+
+  testEmail(email: string): boolean {
+    if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)) {
+      return true;
+    }
+    alert('Email inserido inválido.');
+    return false;
   }
 
   formatDate(date: Date) {

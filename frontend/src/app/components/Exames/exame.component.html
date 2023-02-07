@@ -1,4 +1,4 @@
-<section class="flex justify-center min-h-screen">
+<section class="flex min-h-screen justify-center">
   <div class="mt-6 flex w-4/5 flex-col space-y-5">
     <h2 class="title">Exame</h2>
 
@@ -8,16 +8,24 @@
         class="flex min-w-[250px] max-w-[500px] flex-col space-y-4 rounded-lg border border-white bg-#2 p-7"
       >
         <span class="text-lg font-semibold text-#4">Paciente:</span>
-        <span class="text-lg font-semibold text-#3">{{exame.paciente}}</span>
+        <span class="text-lg font-semibold text-#3">{{ exame.paciente }}</span>
 
         <span class="text-lg font-semibold text-#4">Procedimento:</span>
-        <span class="text-lg font-semibold text-#3">{{exame.procedimento}}</span>
+        <span class="text-lg font-semibold text-#3">{{
+          exame.procedimento
+        }}</span>
 
         <span class="text-lg font-semibold text-#4">Data de coleta:</span>
-        <span class="text-lg font-semibold text-#3 break-words">{{exame.coleta}}</span>
+        <span class="break-words text-lg font-semibold text-#3">{{
+          exame.coleta
+        }}</span>
 
-        <span class="text-lg font-semibold text-#4">Data da entrega do resultado:</span>
-        <span class="text-lg font-semibold text-#3 break-words">{{exame.resultado}}</span>
+        <span class="text-lg font-semibold text-#4"
+          >Data da entrega do resultado:</span
+        >
+        <span class="break-words text-lg font-semibold text-#3">{{
+          exame.resultado
+        }}</span>
       </li>
     </ul>
   </div>

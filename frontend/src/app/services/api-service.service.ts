@@ -60,7 +60,7 @@ export class ApiService {
 
   async resgatarExames() {
     const response = await lastValueFrom(
-      this.httpService.get('http://localhost:8080/api/exames')
+      this.httpService.get<Array<Exame.Request>>('http://localhost:8080/api/exames')
     );
 
     return response;

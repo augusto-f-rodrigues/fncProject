@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 import { ApiService } from 'src/app/services/api-service.service';
 import { ValidationService } from 'src/app/services/validation.service';
 
@@ -25,7 +26,6 @@ export class CadastroComponent implements OnInit {
   mostraExameBlock: boolean = false;
 
   formatDate: string = '';
-  // dataResultado: string = '';
 
   onSelected(value: string): void {
     this.selected = value;
@@ -101,12 +101,11 @@ export class CadastroComponent implements OnInit {
         )
           break;
 
-        const testaCPF = this.validationServices.testaCPF(cpf.toString());
+        const testaCPF = this.validationServices.testCPF(cpf.toString());
+        const testaEmail = this.validationServices.testEmail(email);
 
-        if (!testaCPF) {
-          alert('Cpf inserido inválido.');
-          break;
-        }
+        if (!testaCPF) break;
+        if (!testaEmail) break;
 
         await this.apiServices.cadastroPaciente({ nome: nomePc, cpf, email });
 
