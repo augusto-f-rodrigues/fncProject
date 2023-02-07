@@ -14,6 +14,5 @@ export class PacientesComponent implements OnInit {
   
   async ngOnInit() {
     this.pacientesList = await this.apiServices.resgatarPacientes()
-    console.log(this.pacientesList);
   }
 }

@@ -2,7 +2,7 @@
 <nav class="sticky z-50 flex h-10 items-center justify-center bg-[#1A120B]">
   <div class="flex w-4/5">
     <div class="flex-1 font-bold text-#1"><a routerLink="">FNC</a></div>
-    <ul class="hidden space-x-3 justify-around lg:space-x-8 text-#1 md:flex">
+    <ul class="hidden justify-around space-x-3 text-#1 md:flex lg:space-x-8">
       <li class="">
         <a routerLink="">Home</a>
       </li>
@@ -33,14 +33,18 @@
     class="w-fit flex-col items-center justify-around space-y-5 pt-12 text-#1"
   >
     <li class="w-full border-b-[1px]">
-      <a routerLink="">Home</a>
+      <a (click)="toggleMenu()" routerLink="">Home</a>
     </li>
     <li class="w-full border-b-[1px]">
-      <a routerLink="/pacientes"> <a routerLink="/pacientes">Paciente</a></a>
+      <a (click)="toggleMenu()" routerLink="/pacientes">
+        <a routerLink="/pacientes">Paciente</a></a
+      >
     </li>
     <li class="w-full border-b-[1px]">
-      <a routerLink="/procedimentos">Procedimento</a>
+      <a (click)="toggleMenu()" routerLink="/procedimentos">Procedimento</a>
     </li>
-    <li class="w-full border-b-[1px]"><a routerLink="/exames">Exame</a></li>
+    <li class="w-full border-b-[1px]">
+      <a (click)="toggleMenu()" routerLink="/exames">Exame</a>
+    </li>
   </ul>
 </div>

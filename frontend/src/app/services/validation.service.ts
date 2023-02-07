@@ -65,8 +65,6 @@ export class ValidationService {
 
     date.setDate(date.getDate() + maiorPrazo);
 
-    console.log(date);
-
     return date;
   }
 
