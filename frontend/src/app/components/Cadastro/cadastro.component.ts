@@ -65,11 +65,11 @@ export class CadastroComponent implements OnInit {
   blockWeekend(date: Date): boolean {
     const strToDate = new Date(date);
     strToDate.setDate(strToDate.getDate() + 1);
-    const weekendSelected: boolean = strToDate
-      .toString()
-      .includes('Sat' || 'Sun');
-    console.log(strToDate);
-    if (weekendSelected) {
+
+    if (
+      strToDate.toString().includes('Sat') ||
+      strToDate.toString().includes('Sun')
+    ) {
       // this.dataResultado = '';
       alert('Escolha uma data de entrega entre segunda a sexta.');
       return true;
