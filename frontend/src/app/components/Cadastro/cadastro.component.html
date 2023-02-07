@@ -33,6 +33,7 @@
             type="number"
             name="cpf"
             maxlength="11"
+            oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
             ngModel
           />
         </div>
@@ -67,7 +68,7 @@
           <label class="rounded-lg" for="codigo">Paciente</label>
           <select ngModel name="paciente" class="inputForm">
             <option *ngFor="let paciente of pacientesList">
-              {{paciente.nome}}
+              {{ paciente.nome }}
             </option>
           </select>
         </div>
@@ -76,7 +77,7 @@
           <label class="rounded-lg" for="procedimento">Procedimento</label>
           <select ngModel name="procedimento" class="inputForm">
             <option *ngFor="let procedimento of procedimentosList">
-              {{procedimento.nome}}
+              {{ procedimento.nome }}
             </option>
           </select>
         </div>
@@ -92,19 +93,21 @@
           />
         </div>
 
-        <!-- BLOQUEAR FINAIS DE SEMANA -->
         <div class="flex flex-col space-y-2">
           <label for="resultado">Data da entrega do resultado</label>
           <input
             ngModel
+            (ngModelChange)="blockWeekend($event)"
+            #dataResultado
             name="resultado"
             class="inputForm"
             type="date"
-            min="{{formatDate}}"
+            min="{{ formatDate }}"
           />
         </div>
       </div>
 
+      <!-- SUBMIT BUTTON -->
       <div>
         <button
           *ngIf="procedureSelected"

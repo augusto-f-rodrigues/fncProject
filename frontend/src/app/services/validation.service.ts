@@ -31,20 +31,6 @@ export class ValidationService {
     return true;
   }
 
-  async calcBiggestTerm(date: Date) {
-    const procedimentosList = await this.apiServices.resgatarProcedimentos();
-
-    const maiorPrazo = procedimentosList
-      .map((el) => +el.prazo)
-      .reduce((a, b) => Math.max(a, b));
-
-    date.setDate(date.getDate() + maiorPrazo);
-
-    console.log(date);
-
-    return date;
-  }
-
   formatDate(date: Date) {
     let day, month, year;
 
@@ -57,5 +43,41 @@ export class ValidationService {
     month = month.toString().padStart(2, '0');
 
     return `${year}-${month}-${day}`;
+  }
+
+  async calcBiggestTerm(date: Date) {
+    const procedimentosList = await this.apiServices.resgatarProcedimentos();
+
+    const maiorPrazo = procedimentosList
+      .map((el) => +el.prazo)
+      .reduce((a, b) => Math.max(a, b), 0);
+
+    date.setDate(date.getDate() + maiorPrazo);
+
+    console.log(date);
+
+    return date;
+  }
+
+  async checkCpf(cpf: string): Promise<boolean> {
+    const pacientesList: Paciente.Request[] =
+      await this.apiServices.resgatarPacientes();
+    if (pacientesList.find((el) => el.cpf === cpf)) {
+      alert('Cpf já existe na base de dados.');
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  async checkEmail(email: string): Promise<boolean> {
+    const pacientesList: Paciente.Request[] =
+      await this.apiServices.resgatarPacientes();
+    if (pacientesList.find((el) => el.email === email)) {
+      alert('Email já existe na base de dados.');
+      return true;
+    } else {
+      return false;
+    }
   }
 }

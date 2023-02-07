@@ -5,7 +5,7 @@ import { AppComponent } from './app.component';
 import { NavbarComponent } from './components/Navbar/navbar.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { CadastroComponent } from './components/Cadastro/cadastro.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { PacientesComponent } from './components/Pacientes/pacientes.component';
@@ -29,7 +29,8 @@ import { FooterComponent } from './components/Footer/footer.component';
     AppRoutingModule,
     FontAwesomeModule,
     HttpClientModule,
-    CommonModule
+    CommonModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

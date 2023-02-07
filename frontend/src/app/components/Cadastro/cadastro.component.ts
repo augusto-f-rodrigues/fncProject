@@ -25,7 +25,8 @@ export class CadastroComponent implements OnInit {
   mostraExameBlock: boolean = false;
 
   formatDate: string = '';
-  
+  // dataResultado: string = '';
+
   onSelected(value: string): void {
     this.selected = value;
 
@@ -36,36 +37,53 @@ export class CadastroComponent implements OnInit {
         this.mostraProcedimentoBlock = false;
         break;
 
-        case 'Exame':
-          this.mostraPacienteBlock = false;
-          this.mostraExameBlock = true;
-          this.mostraProcedimentoBlock = false;
-          break;
-          
-          case 'Procedimento':
+      case 'Exame':
+        this.mostraPacienteBlock = false;
+        this.mostraExameBlock = true;
+        this.mostraProcedimentoBlock = false;
+        break;
+
+      case 'Procedimento':
         this.mostraPacienteBlock = false;
         this.mostraExameBlock = false;
         this.mostraProcedimentoBlock = true;
         break;
-        
-        default:
+
+      default:
         this.mostraPacienteBlock = false;
         this.mostraExameBlock = false;
         this.mostraProcedimentoBlock = false;
         break;
-      }
-      
-      this.procedureSelected =
+    }
+
+    this.procedureSelected =
       this.mostraPacienteBlock ||
       this.mostraProcedimentoBlock ||
       this.mostraExameBlock;
-    }
+  }
 
-  async disponibilityDate(date: string){
-    const strToDate = new Date(date)
+  blockWeekend(date: Date): boolean {
+    const strToDate = new Date(date);
     strToDate.setDate(strToDate.getDate() + 1);
-   
-    const biggestTerm = await this.validationServices.calcBiggestTerm(strToDate);
+    const weekendSelected: boolean = strToDate
+      .toString()
+      .includes('Sat' || 'Sun');
+    console.log(strToDate);
+    if (weekendSelected) {
+      // this.dataResultado = '';
+      alert('Escolha uma data de entrega entre segunda a sexta.');
+      return true;
+    }
+    return false;
+  }
+
+  async disponibilityDate(date: string) {
+    const strToDate = new Date(date);
+    strToDate.setDate(strToDate.getDate() + 1);
+
+    const biggestTerm = await this.validationServices.calcBiggestTerm(
+      strToDate
+    );
 
     this.formatDate = this.validationServices.formatDate(biggestTerm);
   }
@@ -76,9 +94,19 @@ export class CadastroComponent implements OnInit {
         const nomePc: string = form?.form?.value?.nome;
         const cpf: string = form?.form?.value?.cpf;
         const email: string = form?.form?.value?.email;
-        
+
+        if (
+          (await this.validationServices.checkCpf(cpf)) ||
+          (await this.validationServices.checkEmail(email))
+        )
+          break;
+
         const testaCPF = this.validationServices.testaCPF(cpf.toString());
-        testaCPF ? null : alert('Cpf inserido inválido.');
+
+        if (!testaCPF) {
+          alert('Cpf inserido inválido.');
+          break;
+        }
 
         await this.apiServices.cadastroPaciente({ nome: nomePc, cpf, email });
 
@@ -105,13 +133,15 @@ export class CadastroComponent implements OnInit {
         const paciente: string = form?.form?.value?.paciente;
         const procedimento: string = form?.form?.value?.procedimento;
         const coleta: string = form?.form?.value?.coleta.toString();
-        const resultado: string = form?.form?.value?.resultado.toString();
+        const resultado: Date = form?.form?.value?.resultado;
+
+        if (this.blockWeekend(resultado)) break;
 
         await this.apiServices.cadastroExame({
           procedimento,
           paciente,
           coleta,
-          resultado,
+          resultado: resultado.toString(),
         });
 
         alert('Exame criado com sucesso.');
@@ -124,7 +154,7 @@ export class CadastroComponent implements OnInit {
   }
 
   async ngOnInit() {
-    this.pacientesList = await this.apiServices.resgatarPacientes()
-    this.procedimentosList = await this.apiServices.resgatarProcedimentos()
+    this.pacientesList = await this.apiServices.resgatarPacientes();
+    this.procedimentosList = await this.apiServices.resgatarProcedimentos();
   }
 }

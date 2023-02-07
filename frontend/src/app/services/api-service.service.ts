@@ -2,7 +2,6 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { lastValueFrom, throwError } from 'rxjs';
 
-
 @Injectable({
   providedIn: 'root',
 })
@@ -19,7 +18,11 @@ export class ApiService {
   }
 
   async resgatarPacientes() {
-    const response = await lastValueFrom(this.httpService.get('http://localhost:8080/api/pacientes'));
+    const response = await lastValueFrom(
+      this.httpService.get<Array<Paciente.Request>>(
+        'http://localhost:8080/api/pacientes'
+      )
+    );
 
     return response;
   }
@@ -27,19 +30,26 @@ export class ApiService {
   // PROCEDIMENTOS
   async cadastroProcedimento(procedimento: Procedimento.Request) {
     const response = await lastValueFrom(
-      this.httpService.post('http://localhost:8080/api/procedimentos', procedimento)
+      this.httpService.post(
+        'http://localhost:8080/api/procedimentos',
+        procedimento
+      )
     ).catch((e) => throwError(() => new Error(e)));
 
     return response;
   }
 
   async resgatarProcedimentos() {
-    const response  = await lastValueFrom(this.httpService.get<Array<Procedimento.Request>>('http://localhost:8080/api/procedimentos'));
+    const response = await lastValueFrom(
+      this.httpService.get<Array<Procedimento.Request>>(
+        'http://localhost:8080/api/procedimentos'
+      )
+    );
 
     return response;
   }
 
-  // EXAME
+  // EXAMES
   async cadastroExame(exame: Exame.Request) {
     const response = await lastValueFrom(
       this.httpService.post('http://localhost:8080/api/exames', exame)
@@ -49,7 +59,9 @@ export class ApiService {
   }
 
   async resgatarExames() {
-    const response = await lastValueFrom(this.httpService.get('http://localhost:8080/api/exames'));
+    const response = await lastValueFrom(
+      this.httpService.get('http://localhost:8080/api/exames')
+    );
 
     return response;
   }
